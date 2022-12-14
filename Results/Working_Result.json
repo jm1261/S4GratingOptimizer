@@ -1,0 +1,85 @@
+{
+  "P350_TM Fano Fit Parameters": [
+    "Peak",
+    "Gamma",
+    "q",
+    "Ampltidude"
+  ],
+  "P350_TM Fano Fit": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "P350_TM Fano Errors": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "P350_TM S4 Fano Fit Parameters": [
+    "Peak",
+    "Gamma",
+    "q",
+    "Ampltidude"
+  ],
+  "P350_TM S4 Fano Fit": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "P350_TM S4 Fano Errors": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "P350_TM Figure Of Merit": 500.0,
+  "P350_TM Variables": {
+    "S4 Strings": [
+      "material_n",
+      "material_k",
+      "fill_factor",
+      "period",
+      "grating_thickness",
+      "waveguide_thickness"
+    ],
+    "S4 Guesses": [
+      1.8,
+      0.01,
+      0.7,
+      351.8151059831048,
+      54.70422114636364,
+      131.80384788659796
+    ]
+  },
+  "P350_TM Constants": {
+    "Reflection": "True",
+    "S4 Strings": [
+      "harmonics",
+      "cover_n",
+      "cover_k",
+      "substrate_n",
+      "substrate_k",
+      "peak_wavelength",
+      "TE",
+      "TM"
+    ],
+    "S4 Values": [
+      21,
+      1,
+      0,
+      1.4542,
+      0,
+      581.5090980261256,
+      0,
+      1
+    ]
+  },
+  "P350_TM Wavelength Range": [
+    528,
+    761,
+    1
+  ]
+}
