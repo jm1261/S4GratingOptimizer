@@ -777,7 +777,6 @@ def opt_individual_variable(variables,
             , error bounds, and precision for further optimization or result
             output
         iterations: <float> iteration count
-        fom: <float> figure of merit
     '''
     variable_names = variables['S4 Strings']
     variable_guesses = variables['S4 Guesses']
@@ -830,8 +829,9 @@ def opt_individual_variable(variables,
         'S4 Strings': [name for name in variable_names],
         'S4 Guesses': [guess for guess in variable_guesses],
         'S4 Error Bounds': [pair for pair in variables['S4 Error Bounds']],
-        'S4 Precision': [precision for precision in variable_precision]}
-    return results_dict, iterations, optimizer_results.fun
+        'S4 Precision': [precision for precision in variable_precision],
+        'FOM': optimizer_results.fun}
+    return results_dict, iterations
 
 
 def optimize_gratings_variables(variables,
@@ -870,7 +870,7 @@ def optimize_gratings_variables(variables,
             simulation constants
             simulation fano results
     '''
-    print(f'Optimizing {batch_name} {sample_name}, tolerance = {tolerance}')
+    print(f'Optimizing {batch_name} {sample_name}')
     variable_names = variables['S4 Strings']
     variable_guesses = variables['S4 Guesses']
     variable_bounds = tuple([tuple(p) for p in variables['S4 Error Bounds']])
@@ -924,7 +924,7 @@ def optimize_S4_grating(parameters_path,
     Optimize S4 grating with given variables, arguments, constants, and names.
     Args:
         parameters_path: <string> path to S4_parameters.json file
-        measured_paths: <dict> paths to measured parameter json files, can
+        measured_paths: <d9ict> paths to measured parameter json files, can
                         be null
         batch_name: <string> batch name identifier string
         grating_name: <string> grating name identifier string
@@ -940,21 +940,18 @@ def optimize_S4_grating(parameters_path,
     Returns:
         grating_results: <dict> results dictionary
     '''
-    print(f'Optimizing {batch_name} {grating_name}')
     arguments, constants, variables = S4_args(
         parameters_path=parameters_path,
         file_paths=measured_paths,
         batch_name=f'{batch_name}',
         grating_name=f'{grating_name}')
-    figure_merit = [250000]  # very large number, maximum error value of f.o.m
-    loop_count = 0
-    optimizer_iterations = []
-    optimized_variables = variables
+    figure_merit = []
+    iteration_count = 0
     if arguments['All Arguments'] == 'True':
+        optimized_variables = {}
         while figure_merit[0] > 1:
-            tolerance = float(f'1E-{loop_count}')
-            variables_dict, iterations, fom = opt_individual_variable(
-                variables=optimized_variables,
+            variables_dict1, iterations1 = opt_individual_variable(
+                variables=variables,
                 constants=constants,
                 sample_name=f'{grating_name}',
                 batch_name=f'{batch_name}',
@@ -963,16 +960,34 @@ def optimize_S4_grating(parameters_path,
                 plot_figure=plot_figure,
                 out_path=out_path,
                 log_fom=log_fom,
-                tolerance=tolerance)
-            figure_merit[0] = fom
-            loop_count += 1
-            optimized_variables.update(variables_dict)
-            optimizer_iterations.append(iterations)
-            if loop_count == 8:
-                break
-        tolerance = float(f'1E-{loop_count + 1}')
+                tolerance=1E-2)
+            figure_merit[0] = variables_dict1['FOM']
+            variables_dict2, iterations2 = opt_individual_variable(
+                variables=variables_dict1,
+                constants=constants,
+                sample_name=f'{grating_name}',
+                batch_name=f'{batch_name}',
+                peak_parameters=peak_parameters,
+                lua_script=lua_script,
+                plot_figure=plot_figure,
+                out_path=out_path,
+                log_fom=log_fom,
+                tolerance=1E-4)
+            figure_merit[0] = variables_dict2['FOM']
+            variables_dict3, iterations3 = opt_individual_variable(
+                variables=variables_dict2,
+                constants=constants,
+                sample_name=f'{grating_name}',
+                batch_name=f'{batch_name}',
+                peak_parameters=peak_parameters,
+                lua_script=lua_script,
+                plot_figure=plot_figure,
+                out_path=out_path,
+                log_fom=log_fom,
+                tolerance=1E-6)
+            figure_merit[0] = variables_dict3['FOM']
         grating_results = optimize_gratings_variables(
-            variables=optimized_variables,
+            variables=variables_dict3,
             constants=constants,
             sample_name=f'{grating_name}',
             batch_name=f'{batch_name}',
@@ -981,8 +996,9 @@ def optimize_S4_grating(parameters_path,
             plot_figure=plot_figure,
             out_path=out_path,
             log_fom=log_fom,
-            tolerance=tolerance,
-            iterations=sum(optimizer_iterations))
+            tolerance=1E-6,
+            iterations=iterations1 + iterations2 + iterations3)
+        print(grating_results)
         if log_fom == 'True':
             var, fom, fanos, sim_fano, exp_fano, simint, expint = load_fomlog(
                 directory_path=out_path,
@@ -1006,5 +1022,5 @@ def optimize_S4_grating(parameters_path,
         grating_results = {
             f'{grating_name} Missing Parameters':
             [f'{argument}' for argument in arguments["Missing Arguments"]]}
-    print(f'Optimized {batch_name} {grating_name}\n')
+        print(grating_results)
     return grating_results

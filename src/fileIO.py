@@ -16,6 +16,34 @@ def load_json(file_path):
         return json.load(file)
 
 
+def convert(o):
+    '''
+    Check type of data string
+    '''
+    if isinstance(o, np.generic):
+        return o.item()
+    raise TypeError
+
+
+def save_json_dicts(out_path,
+                    dictionary):
+    '''
+    Save dictionary to json file.
+    Args:
+        out_path: <string> path to file, including file name and extension
+        dictionary: <dict> python dictionary to save out
+    Returns:
+        None
+    '''
+    with open(out_path, 'w') as outfile:
+        json.dump(
+            dictionary,
+            outfile,
+            indent=2,
+            default=convert)
+        outfile.write('\n')
+
+
 def load_S4_parameters(file_path):
     '''
     Load S4 simulation parameters from S4_parameters.json file in main directory
@@ -23,6 +51,15 @@ def load_S4_parameters(file_path):
     give the lua strings and values of all simulation constants, lua strings,
     guesses, and error bounds of simulation variables, and lua strings and file
     extension strings of all measured variables or constants.
+    Args:
+        file_path: <string> path to S4 parameters json file
+    Returns:
+        constants: <dict> constants dictionary containing reflection bool,
+                    constants lua name strings, constants values
+        variables: <dict> variables dictionary containing lua name strings,
+                    initial guesses, error bounds
+        measured: <dict> measured variables dictionary containing constant bool,
+                    lua name strings, file name strings
     '''
     simulation_parameters = load_json(file_path=file_path)
     constants = simulation_parameters['Constants']
@@ -35,7 +72,8 @@ def get_grating_periods(file_path,
                         batch_name,
                         grating_name):
     '''
-    Pull grating period and errors from period json result file.
+    Pull grating period and errors from period json result file. Returns 3x the
+    measured error (i.e., 3 sigma error range).
     Args:
         file_path: <string> path to file
         batch_name: <string> batch name identifier string, e.g. A1
@@ -45,8 +83,9 @@ def get_grating_periods(file_path,
         period_error <float> measured grating period error
     '''
     period_parameters = load_json(file_path=file_path)
-    period, period_error = (
+    period, error = (
         (period_parameters[f'{batch_name} Average'])[f'{grating_name}'])
+    period_error = 10 * error
     return period, period_error
 
 
@@ -54,6 +93,7 @@ def get_grating_thicknesses(file_path,
                             grating_name):
     '''
     Pull grating thicknesses and errors from grating_thickness json result file.
+    Returns 3x the measured error (i.e., 3 sigma error range).
     Args:
         file_path: <string> path to file
     Returns:
@@ -62,13 +102,15 @@ def get_grating_thicknesses(file_path,
     '''
     grating_parameters = load_json(file_path=file_path)
     grating_thickness = grating_parameters[f'{grating_name} Step Height']
-    grating_error = grating_parameters[f'{grating_name} Step Height Error']
+    error = grating_parameters[f'{grating_name} Step Height Error']
+    grating_error = 10 * error
     return grating_thickness, grating_error
 
 
 def get_film_thickness(file_path):
     '''
     Pull average film thickness and error from film_thickness json result file.
+    Returns 3x the measured error (i.e., 3 sigma error range).
     Args:
         file_path: <string> path to file
     Returns:
@@ -77,7 +119,8 @@ def get_film_thickness(file_path):
     '''
     film_parameters = load_json(file_path=file_path)
     film_thickness = film_parameters['Average Result']
-    film_error = film_parameters['Average Error']
+    error = film_parameters['Average Error']
+    film_error = 10 * error
     return film_thickness, film_error
 
 
@@ -85,6 +128,7 @@ def get_peak_wavelength(file_path,
                         grating_name):
     '''
     Gets target peak wavelength and error from measured experimental peak json.
+    Returns 3x the measured error (i.e., 3 sigma error range).
     Args:
         file_path: <string> path to file
         grating_name: <string> grating string identifier
@@ -94,7 +138,8 @@ def get_peak_wavelength(file_path,
     '''
     peak_parameters = load_json(file_path=file_path)
     peak = peak_parameters[f'{grating_name} Peak Wavelength']
-    peak_error = peak_parameters[f'{grating_name} Peak Error']
+    error = peak_parameters[f'{grating_name} Peak Error']
+    peak_error = 3 * error
     return peak, peak_error
 
 
@@ -112,7 +157,7 @@ def measured_S4_parameter_files(file_paths,
         grating_name: <string> grating name identifier string
     Returns:
         value: <float> measured parameter value
-        error: <float> measured parameter value error
+        error_bound: <array> measured parameter value error bound [lower, upper]
     '''
     file_path = file_paths[f'{parameter_string} Path']
     if parameter_string == 'Period':
@@ -120,22 +165,22 @@ def measured_S4_parameter_files(file_paths,
             file_path=file_path,
             batch_name=batch_name,
             grating_name=(grating_name.split('_'))[0])
-    elif parameter_string == 'Grating':
-        value, error = get_grating_thicknesses(
-            file_path=file_path,
-            grating_name=(grating_name.split('_'))[0])
-    elif parameter_string == 'Film':
-        grating, grating_error = get_grating_thicknesses(
-            file_path=file_paths['Grating Path'],
-            grating_name=(grating_name.split('_'))[0])
-        film, film_error = get_film_thickness(file_path=file_path)
-        value = film - grating
-        error = np.sqrt((film_error ** 2) + (grating_error ** 2))
+        error_bound = [value - error, value + error]
     elif parameter_string == 'Peak':
         value, error = get_peak_wavelength(
             file_path=file_path,
             grating_name=grating_name)
-    return value, error
+        error_bound = [value - error, value + error]
+    elif parameter_string == 'Grating':
+        value, error = get_grating_thicknesses(
+            file_path=file_path,
+            grating_name=(grating_name.split('_'))[0])
+        film, film_error = get_film_thickness(file_path=file_paths['Film Path'])
+        error_bound = [value - error, film]
+    elif parameter_string == 'Film':
+        value, error = get_film_thickness(file_path=file_path)
+        error_bound = [value - error, value + error]
+    return value, error_bound
 
 
 def get_S4_polarisation(grating_string):
@@ -175,7 +220,7 @@ def check_4layer_parameters(constants,
     arguments = [
         'harmonics', 'cover_n', 'cover_k', 'substrate_n', 'substrate_k',
         'material_n', 'material_k', 'fill_factor', 'period',
-        'grating_thickness', 'waveguide_thickness', 'TE', 'TM',
+        'grating_thickness', 'film_thickness', 'TE', 'TM',
         'peak_wavelength']
     key_present = []
     user_arguments = []
@@ -217,25 +262,25 @@ def S4_args(parameters_path,
     '''
     constants, variables, measured = load_S4_parameters(
         file_path=parameters_path)
-    measured_constants, measured_strings, measured_files = measured.items()
-    for index, statement in enumerate(measured_constants[1]):
+    m_constants, m_strings, m_files, m_precision = measured.items()
+    for index, statement in enumerate(m_constants[1]):
         try:
             value, error = measured_S4_parameter_files(
                 file_paths=file_paths,
                 batch_name=batch_name,
                 grating_name=grating_name,
-                parameter_string=(measured_files[1])[index])
+                parameter_string=(m_files[1])[index])
             if np.isnan(value):
                 pass
             else:
                 if statement == 'True':
-                    constants['S4 Strings'].append((measured_strings[1])[index])
+                    constants['S4 Strings'].append((m_strings[1])[index])
                     constants['S4 Values'].append(value)
                 else:
-                    variables['S4 Strings'].append((measured_strings[1])[index])
+                    variables['S4 Strings'].append((m_strings[1])[index])
                     variables['S4 Guesses'].append(value)
-                    variables['S4 Error Bounds'].append(
-                        [value - (0.3 * value), value + (0.3 * value)])
+                    variables['S4 Error Bounds'].append(error)
+                    variables['S4 Precision'].append((m_precision[1])[index])
         except:
             pass
     polarise_string, polarise_value = get_S4_polarisation(
@@ -247,34 +292,6 @@ def S4_args(parameters_path,
         constants=constants,
         variables=variables)
     return arguments, constants, variables
-
-
-def convert(o):
-    '''
-    Check type of data string
-    '''
-    if isinstance(o, np.generic):
-        return o.item()
-    raise TypeError
-
-
-def save_json_dicts(out_path,
-                    dictionary):
-    '''
-    Save dictionary to json file.
-    Args:
-        out_path: <string> path to file, including file name and extension
-        dictionary: <dict> python dictionary to save out
-    Returns:
-        None
-    '''
-    with open(out_path, 'w') as outfile:
-        json.dump(
-            dictionary,
-            outfile,
-            indent=2,
-            default=convert)
-        outfile.write('\n')
 
 
 def log_figure_of_merit(variables,

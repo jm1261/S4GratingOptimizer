@@ -1,27 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from pathlib import Path
-
-
-def fano_resonance(x, x0, gamma, q, amplitude):
-    '''
-    Fano resonance peak equation.
-    Args:
-        x: <array> x-axis point, wavelength in nm
-        x0: <float> peak x point, wavelength in nm
-        gamma: <float> reduced frequency
-        q: <float> shape factor
-        amplitude: <float> peak amplitude
-    Returns:
-        y: <array> data array for fano peak
-    '''
-    omega = 2 * ((x - x0) / gamma)
-    numerator = ((q + omega) ** 2)
-    denominator = 1 + (omega ** 2)
-    y = amplitude * (numerator / denominator)
-    return y
-
 
 def fanofitplot(wavelength,
                 intensity,
@@ -96,6 +75,55 @@ def fanofitplot(wavelength,
     plt.close(fig)
 
 
+def no_damping_fano(x,
+                    x0,
+                    amplitude,
+                    assymetry,
+                    gamma,
+                    offset):
+    '''
+    No damping fano resonance equation from literature.
+    Args:
+        x: <float> wavelength/energy value at which to analyse the fano
+        x0: <float> peak wavelength/energy value of the fano resonance
+        amplitude: <float> fano resonance amplitude
+        assymetry: <float> assymetry factor
+        gamma: <float> peak width factor
+        offset: <float> DC offset
+    Returns:
+        y: <float> fano resonance value at x
+    '''
+    numerator = ((assymetry * gamma) + (x - x0)) ** 2
+    denominator = (gamma ** 2) + ((x - x0) ** 2)
+    y = (amplitude * (numerator / denominator)) + offset
+    return y
+
+
+def fano_resonances(x,
+                    x0,
+                    gamma,
+                    q,
+                    amplitude,
+                    damping):
+    '''
+    Fano resonance peak equation.
+    Args:
+        x: <array> x-axis point, wavelength in nm
+        x0: <float> peak x point, wavelength in nm
+        gamma: <float> reduced frequency
+        q: <float> shape factor
+        amplitude: <float> peak amplitude
+        damping: <float> damping factor
+    Returns:
+        y: <array> data array for fano peak
+    '''
+    omega = 2 * ((x - x0) / gamma)
+    numerator = ((q + omega) ** 2) + damping
+    denominator = 1 + (omega ** 2)
+    y = amplitude * (numerator / denominator)
+    return y
+
+
 def fomplot(wavelengths,
             variables,
             figure_of_merit,
@@ -105,10 +133,12 @@ def fomplot(wavelengths,
             simulation_intensity,
             experimental_intensity,
             variable_names,
+            fano_names,
             out_path,
             show=False):
     '''
     Plot figure of merit log and simulation output comparison from S4 optimizer.
+    Remember to add/subtract the simulation wavelength extensions from analysis.
     Args:
         wavelengths: <array> [start, stop, step]
         variables: <array> nested array of simulation/optimizer variables for
@@ -124,31 +154,53 @@ def fomplot(wavelengths,
         variable_names: <array> variable name strings for variables array, must
                         be same length
         out_path: <string> path to save
+        damping: <bool> if True, damping in fano fit
         show: <bool> if True, graph show, always saves
     Returns:
         None
     '''
-    fano_names = ['x0', 'gamma', 'q', 'amplitude']
     wavelength_range = np.arange(
-        wavelengths[0],
-        wavelengths[1] + (wavelengths[2] / 10),
+        wavelengths[0] + 25,
+        wavelengths[1] - 25 + (wavelengths[2] / 10),
         wavelengths[2])
-    sim_fano = [
-        fano_resonance(
-            x=x,
-            x0=simulation_fano[0],
-            gamma=simulation_fano[1],
-            q=simulation_fano[2],
-            amplitude=simulation_fano[3])
-        for x in wavelength_range]
-    exp_fano = [
-        fano_resonance(
-            x=x,
-            x0=experimental_fano[0],
-            gamma=experimental_fano[1],
-            q=experimental_fano[2],
-            amplitude=experimental_fano[3])
-        for x in wavelength_range]
+    if fano_names[4] == 'Damping':
+        sim_fano = [
+            fano_resonances(
+                x=x,
+                x0=simulation_fano[0],
+                gamma=simulation_fano[1],
+                q=simulation_fano[2],
+                amplitude=simulation_fano[3],
+                damping=simulation_fano[4])
+            for x in wavelength_range]
+        exp_fano = [
+            fano_resonances(
+                x=x,
+                x0=experimental_fano[0],
+                gamma=experimental_fano[1],
+                q=experimental_fano[2],
+                amplitude=experimental_fano[3],
+                damping=experimental_fano[4])
+            for x in wavelength_range]
+    else:
+        sim_fano = [
+            no_damping_fano(
+                x=x,
+                x0=simulation_fano[0],
+                amplitude=simulation_fano[1],
+                assymetry=simulation_fano[2],
+                gamma=simulation_fano[3],
+                offset=simulation_fano[4])
+            for x in wavelength_range]
+        exp_fano = [
+            no_damping_fano(
+                x=x,
+                x0=experimental_fano[0],
+                amplitude=experimental_fano[1],
+                assymetry=experimental_fano[2],
+                gamma=experimental_fano[3],
+                offset=experimental_fano[4])
+            for x in wavelength_range]
     x_values = range(len(figure_of_merit))
     fig, (ax1, ax2, ax3) = plt.subplots(
         nrows=3,
@@ -280,64 +332,6 @@ def fomplot(wavelengths,
     if show:
         plt.show()
     plt.savefig(out_path)
-    plt.cla()
-    fig.clf()
-    plt.close(fig)
-
-
-def S4_plot(wavelength,
-            simulation_intensity,
-            experimental_intensity,
-            batch_name,
-            sample_name,
-            out_path):
-    '''
-    Plot S4 wavelength and intensity.
-    Args:
-        wavelength: <array> wavelength array in nm
-        simulation_intensity: <array> simulation intensity array in au
-        experimental_intensity: <array> experimental intensity array in au
-        batch_name: <string> batch name identifier string
-        sample_name: <string> sample name identifier string
-        out_path: <string> path to save
-    Returns:
-        None
-    '''
-    fig, ax = plt.subplots(
-        nrows=1,
-        ncols=1,
-        figsize=[10, 7])
-    ax.plot(
-        wavelength,
-        simulation_intensity,
-        'b',
-        lw=2,
-        label='simulation')
-    ax.plot(
-        wavelength,
-        experimental_intensity,
-        'r',
-        lw=2,
-        label='experimental')
-    ax.legend(
-        loc=0,
-        prop={'size': 14})
-    ax.set_xlabel(
-        'Wavelength [nm]',
-        fontsize=14,
-        fontweight='bold')
-    ax.set_ylabel(
-        'Intensity [au]',
-        fontsize=14,
-        fontweight='bold')
-    ax.tick_params(
-        axis='both',
-        size=12)
-    ax.set_title(
-        f'{sample_name}',
-        fontsize=14,
-        fontweight='bold')
-    plt.savefig(Path(f'{out_path}/{batch_name}_{sample_name}_S4plot.png'))
     plt.cla()
     fig.clf()
     plt.close(fig)

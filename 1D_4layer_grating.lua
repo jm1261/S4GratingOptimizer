@@ -34,6 +34,7 @@ S:AddMaterial(
     }
 )
 
+waveguide_thickness = film_thickness - grating_thickness + 0.01
 S:AddLayer('cover', 0, 'Cover')
 S:AddLayer('grating', grating_thickness, 'Grating')
 S:AddLayer('waveguide', waveguide_thickness, 'Waveguide')

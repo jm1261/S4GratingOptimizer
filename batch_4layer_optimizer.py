@@ -10,9 +10,7 @@ def batch_4_layer_optimizer(batch_name,
                             parameters_path,
                             plot_figure,
                             out_path,
-                            log_fom,
-                            normalise=False,
-                            normalise_sim=False):
+                            log_fom):
     '''
     Batch 4 layer grating optimizer.
     Args:
@@ -22,8 +20,6 @@ def batch_4_layer_optimizer(batch_name,
         plot_figure: <string> If "True", will plot output files
         out_path: <string> path to save out figure or log files
         log_fom: <string> if "True" will log figure of merit optimization
-        normalise: <bool> if True, intensity spectrum from experiment normalised
-        normalise_sim: <bool> if True, intensity spectrim from sim normalised
     Returns:
         batch_dictionary: <dict> batch results dictionary
     '''
@@ -31,21 +27,19 @@ def batch_4_layer_optimizer(batch_name,
         file_path=file_paths['Peak Path'])
     batch_dictionary = {}
     all_paths = [file_paths[key] for key in file_paths.keys()]
-    batch_dictionary.update({'File Pats': [f'{path}' for path in all_paths]})
+    batch_dictionary.update({'File Paths': [f'{path}' for path in all_paths]})
     batch_dictionary.update({'Gratings': gratings})
     for grating in gratings:
         grating_results = anal.optimize_S4_grating(
             parameters_path=parameters_path,
-            measured_paths=filepaths,
+            measured_paths=file_paths,
             batch_name=f'{batch_name}',
             grating_name=f'{grating}',
             peak_parameters=peak_parameters,
             lua_script='1D_4layer_grating.lua',
             plot_figure=plot_figure,
             out_path=out_path,
-            log_fom=log_fom,
-            normalise=normalise,
-            normalise_sim=normalise_sim)
+            log_fom=log_fom)
         batch_dictionary.update({f'{grating}': grating_results})
     return batch_dictionary
 
@@ -59,7 +53,7 @@ if __name__ == '__main__':
         file_string='.json')
     parent, batches = fp.get_S4_batches(file_paths=file_paths)
 
-    ''' Loop Files '''
+    ''' Loop Experimental Files '''
     for batch, filepaths in batches.items():
         out_file = Path(f'{directory_paths["Results Path"]}/{batch}_S4.json')
         if out_file.is_file():
@@ -71,10 +65,7 @@ if __name__ == '__main__':
                 parameters_path=Path(f'{root}/S4_Parameters.json'),
                 plot_figure=info['Plot Files'],
                 out_path=Path(f'{directory_paths["Results Path"]}'),
-                log_fom=info['Log FOM'],
-                normalise=True,
-                normalise_sim=False)
-
+                log_fom=info['Log FOM'])
             io.save_json_dicts(
                 out_path=out_file,
                 dictionary=results_dictionary)
