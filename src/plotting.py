@@ -160,8 +160,8 @@ def fomplot(wavelengths,
         None
     '''
     wavelength_range = np.arange(
-        wavelengths[0] + 25,
-        wavelengths[1] - 25 + (wavelengths[2] / 10),
+        wavelengths[0] + 10,
+        wavelengths[1] - 10 + (wavelengths[2] / 10),
         wavelengths[2])
     if fano_names[4] == 'Damping':
         sim_fano = [

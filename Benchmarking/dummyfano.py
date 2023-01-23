@@ -1,5 +1,5 @@
 import numpy as np
-import src.analysis as anal
+import old.analysis as anal
 import matplotlib.pyplot as plt
 
 from pathlib import Path

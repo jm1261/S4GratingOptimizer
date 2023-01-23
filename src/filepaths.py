@@ -89,8 +89,12 @@ def get_parent_directory(file_path):
     Returns:
         parent_directory: <string> parent directory name (not path)
     '''
+    operating_system = check_platform()
     dirpath = os.path.dirname(file_path)
-    dirpathsplit = dirpath.split('\\')
+    if operating_system == 'Linux':
+        dirpathsplit = dirpath.split('/')
+    else:
+        dirpathsplit = dirpath.split('\\')
     parent_directory = dirpathsplit[-1]
     return parent_directory
 
@@ -169,7 +173,7 @@ def get_S4_batches(file_paths):
 
 def get_experimental_gratings(file_path):
     '''
-    Get all batch gratings to process.
+    Get all batch gratings to processed irrespective of polarisation.
     Args:
         file_path: <string> path to peak parameters json
     Returns:
@@ -177,5 +181,12 @@ def get_experimental_gratings(file_path):
         gratings: <array> array of grating strings
     '''
     peak_parameters = load_json(file_path=file_path)
-    gratings = [g for g in peak_parameters['Spectrum Secondary String']]
+    all_peaks = [p for p in peak_parameters['Spectrum Secondary String']]
+    all_gratings = [(p.split('_'))[0] for p in all_peaks]
+    gratings = []
+    for grating in all_gratings:
+        if grating in gratings:
+            pass
+        else:
+            gratings.append(grating)
     return peak_parameters, gratings

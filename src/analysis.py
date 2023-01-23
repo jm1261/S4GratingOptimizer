@@ -1,13 +1,12 @@
 import os
 import subprocess
 import numpy as np
+import src.fileIO as io
 import scipy.optimize as opt
 
 from io import StringIO
 from pathlib import Path
 from src.plotting import fanofitplot, fomplot
-from src.fileIO import save_json_dicts, load_json
-from src.fileIO import S4_args, load_fomlog, log_figure_of_merit
 
 
 def no_damping_fano(x,
@@ -99,8 +98,8 @@ def simulation_wavelength_range(experimental_wavelength,
         xp=experimental_wavelength,
         fp=experimental_intensity)
     simulation_wavelength = [
-        wavelength_range[0] - 25,
-        wavelength_range[1] + 25,
+        wavelength_range[0] - 10,
+        wavelength_range[1] + 10,
         wavelength_range[2]]
     return wavelengths, intensity, simulation_wavelength
 
@@ -126,16 +125,19 @@ def argument_string(names,
 
 def parameters_to_arguments(constants,
                             variables,
-                            wavelength_range):
+                            wavelength_range,
+                            polarisation_string,
+                            polarisation_value):
     '''
     Turn constants and variables dictionaries to argument names and values.
     Args:
         constants: <dict> simulation constants dictionary
         variables: <dict> simulation variables dictionary
         wavelength_range: <array> [start, stop, step]
+        polarisation_string: <array> ['TE', 'TM'] or ['TM', 'TE']
+        polarisation_value: <array> [1, 0] for TE, [0, 1] for TM
     Returns:
-        names: <array> argument names
-        values: <array> argument values
+        arg_string: <string> argument string in correct format
     '''
     names = []
     values = []
@@ -156,6 +158,9 @@ def parameters_to_arguments(constants,
         'wavelength_final',
         'wavelength_step']
     for name, value in zip(wavelength_names, wavelength_range):
+        names.append(name)
+        values.append(value)
+    for name, value in zip(polarisation_string, polarisation_value):
         names.append(name)
         values.append(value)
     arg_string = argument_string(
@@ -470,7 +475,7 @@ def compare_experimental_simulation(sample_name,
     '''
     if sum(simulation_fano) == 0:
         figure_merit = (500 ** 2)
-        figure_merit_fano = simulation_fano
+        figure_merit_fano = (500 ** 2)
         figure_merit_overlap = (500 ** 2)
         differences = 0
     else:
@@ -579,13 +584,19 @@ def figure_of_merit(variables,
     Returns:
         figure_merit: <float> individual figure of merit float for optimizer
     '''
+    polarise_string, polarise_value = io.get_S4_polarisation(
+        grating_string=sample_name)
     exp_wav, exp_intensity, sim_wav = simulation_wavelength_range(
-        experimental_wavelength=peak_parameters[f'{sample_name} Wavelength'],
-        experimental_intensity=peak_parameters[f'{sample_name} Intensity'])
+        experimental_wavelength=peak_parameters[
+            f'{sample_name} Wavelength'],
+        experimental_intensity=peak_parameters[
+            f'{sample_name} Intensity'])
     argument_string = parameters_to_arguments(
         constants=constants,
         variables=variables,
-        wavelength_range=sim_wav)
+        wavelength_range=sim_wav,
+        polarisation_string=polarise_string,
+        polarisation_value=polarise_value)
     S4_output = S4_RCWA(
         lua_script=lua_script,
         argument_string=argument_string)
@@ -624,17 +635,11 @@ def figure_of_merit(variables,
         exp_fano,
         **sim_fano,
         **figure_of_merit)
-    results_dict.update({f'{sample_name} Variables': variables})
-    results_dict.update({f'{sample_name} Constants': constants})
-    results_dict.update(
-        {f'{sample_name} Wavelength Range': sim_wav})
-    save_json_dicts(
-        out_path=Path(f'{out_path}/Working_Result.json'),
-        dictionary=results_dict)
     if log_fom == 'True':
-        log_figure_of_merit(
+        io.log_figure_of_merit(
             variables=variables['S4 Guesses'],
-            figure_of_merit=figure_of_merit[f'{sample_name} Figure Of Merit'],
+            figure_of_merit=figure_of_merit[
+                f'{sample_name} Figure Of Merit'],
             simulation_fano=sim_fano[f'{sample_name} S4 Fano Fit'],
             experimental_fano=exp_fano[f'{sample_name} Fano Fit'],
             simulation_intensity=trimmed_intensity,
@@ -642,6 +647,13 @@ def figure_of_merit(variables,
             sample_name=sample_name,
             batch_name=f'{batch_name}',
             out_path=out_path)
+    results_dict.update({f'{sample_name} Variables': variables})
+    results_dict.update({f'{sample_name} Constants': constants})
+    results_dict.update({
+        f'{sample_name} Wavelength Range': [wav for wav in sim_wav]})
+    io.save_json_dicts(
+        out_path=Path(f'{out_path}/Working_Result.json'),
+        dictionary=results_dict)
     return figure_of_merit[f'{sample_name} Figure Of Merit']
 
 
@@ -784,7 +796,6 @@ def opt_individual_variable(variables,
     variable_bounds = tuple([tuple(p) for p in variables['S4 Error Bounds']])
     variable_precision = variables['S4 Precision']
     optimizer_iterations = []
-    optimizer_errors = []
     for index, variable in enumerate(variable_guesses):
         print(f'Optimizing: {variable_names[index]}, tolerance = {tolerance}')
         iteration_constant_values = [
@@ -815,13 +826,8 @@ def opt_individual_variable(variables,
                 'gtol': tolerance,
                 'eps': variable_precision[index],
                 'maxiter': 1000})
-        optimizer_hessian = np.diag(optimizer_results.hess_inv.todense())
-        hessian_error = ([
-            tolerance * optimizer_results.fun * hess
-            for hess in optimizer_hessian])
         variable_guesses[index] = (optimizer_results.x)[0]
         optimizer_iterations.append(optimizer_results.nit)
-        optimizer_errors.append(hessian_error)
         print(
             f'Optimized: {variable_names[index]}, '
             f'fom = {optimizer_results.fun}\n')
@@ -898,11 +904,12 @@ def optimize_gratings_variables(variables,
         tolerance * optimizer_results.fun * hess
         for hess in optimizer_hessian])
     simulation_path = Path(f'{out_path}/Working_Result.json')
-    simulation_fano = load_json(file_path=simulation_path)
+    simulation_fano = io.load_json(file_path=simulation_path)
     variable_results = {
         f'{sample_name} Optimizer Results': [x for x in optimizer_results.x],
         f'{sample_name} Optimizer Errors': [x for x in optimizer_errors],
-        f'{sample_name} Iterations': optimizer_results.nit + iterations}
+        f'{sample_name} Iterations': optimizer_results.nit + iterations,
+        f'{sample_name} FoM Tolerance': tolerance}
     results_dict = dict(
         variable_results,
         **simulation_fano)
@@ -941,22 +948,22 @@ def optimize_S4_grating(parameters_path,
         grating_results: <dict> results dictionary
     '''
     print(f'Optimizing {batch_name} {grating_name}')
-    arguments, constants, variables = S4_args(
+    arguments, TE_constants, TE_variables = io.S4_args(
         parameters_path=parameters_path,
         file_paths=measured_paths,
         batch_name=f'{batch_name}',
         grating_name=f'{grating_name}')
-    figure_merit = [250000]  # very large number, maximum error value of f.o.m
-    loop_count = 0
-    optimizer_iterations = []
-    optimized_variables = variables
+    TE_figure_merit = [100]
+    TE_optimizer_iterations = []
+    TE_optimized_variables = TE_variables
     if arguments['All Arguments'] == 'True':
-        while figure_merit[0] > 1:
-            tolerance = float(f'1E-{loop_count}')
+        loop_count = 0
+        while TE_figure_merit[0] > 1:
+            tolerance = float(f'1E{loop_count}')
             variables_dict, iterations, fom = opt_individual_variable(
-                variables=optimized_variables,
-                constants=constants,
-                sample_name=f'{grating_name}',
+                variables=TE_optimized_variables,
+                constants=TE_constants,
+                sample_name=f'{grating_name}_TE',
                 batch_name=f'{batch_name}',
                 peak_parameters=peak_parameters,
                 lua_script=lua_script,
@@ -964,17 +971,17 @@ def optimize_S4_grating(parameters_path,
                 out_path=out_path,
                 log_fom=log_fom,
                 tolerance=tolerance)
-            figure_merit[0] = fom
-            loop_count += 1
-            optimized_variables.update(variables_dict)
-            optimizer_iterations.append(iterations)
-            if loop_count == 8:
+            loop_count -= 1
+            TE_figure_merit[0] = fom
+            TE_optimized_variables.update(variables_dict)
+            TE_optimizer_iterations.append(iterations)
+            if loop_count == -6:
                 break
-        tolerance = float(f'1E-{loop_count + 1}')
-        grating_results = optimize_gratings_variables(
-            variables=optimized_variables,
-            constants=constants,
-            sample_name=f'{grating_name}',
+        tolerance = float(f'1E{loop_count - 1}')
+        TE_grating_results = optimize_gratings_variables(
+            variables=TE_optimized_variables,
+            constants=TE_constants,
+            sample_name=f'{grating_name}_TE',
             batch_name=f'{batch_name}',
             peak_parameters=peak_parameters,
             lua_script=lua_script,
@@ -982,29 +989,111 @@ def optimize_S4_grating(parameters_path,
             out_path=out_path,
             log_fom=log_fom,
             tolerance=tolerance,
-            iterations=sum(optimizer_iterations))
-        if log_fom == 'True':
-            var, fom, fanos, sim_fano, exp_fano, simint, expint = load_fomlog(
-                directory_path=out_path,
-                sample_name=f'{grating_name}',
+            iterations=sum(TE_optimizer_iterations))
+        TM_constants = TE_constants
+        TM_optimized_variables = {
+            'S4 Strings': ['material_n', 'grating_thickness', 'film_thickness'],
+            'S4 Guesses': [],
+            'S4 Error Bounds': [],
+            'S4 Precision': []}
+        for index, string in enumerate(TE_optimized_variables['S4 Strings']):
+            if string in TM_optimized_variables['S4 Strings']:
+                TM_optimized_variables['S4 Guesses'].append(
+                    (TE_optimized_variables['S4 Guesses'])[index])
+                TM_optimized_variables['S4 Error Bounds'].append(
+                    [
+                        ((TE_optimized_variables['S4 Guesses'])[index]) * 0.7,
+                        ((TE_optimized_variables['S4 Guesses'])[index]) * 1.3,])
+                TM_optimized_variables['S4 Precision'].append(
+                    (TE_optimized_variables['S4 Precision'])[index])
+            else:
+                TM_constants['S4 Strings'].append(string)
+                TM_constants['S4 Values'].append(
+                    (TE_optimized_variables['S4 Guesses'])[index])
+        TM_figure_merit = [100]
+        TM_optimizer_iterations = []
+        loop_count = 0
+        while TE_figure_merit[0] > 1:
+            tolerance = float(f'1E{loop_count}')
+            variables_dict, iterations, fom = opt_individual_variable(
+                variables=TM_optimized_variables,
+                constants=TM_constants,
+                sample_name=f'{grating_name}_TM',
                 batch_name=f'{batch_name}',
-                length_variables=len(variables['S4 Strings']))
+                peak_parameters=peak_parameters,
+                lua_script=lua_script,
+                plot_figure=plot_figure,
+                out_path=out_path,
+                log_fom=log_fom,
+                tolerance=tolerance)
+            loop_count -= 1
+            TM_figure_merit[0] = fom
+            TM_optimized_variables.update(variables_dict)
+            TM_optimizer_iterations.append(iterations)
+            if loop_count == -6:
+                break
+        tolerance = float(f'1E{loop_count - 1}')
+        TM_grating_results = optimize_gratings_variables(
+            variables=TM_optimized_variables,
+            constants=TM_constants,
+            sample_name=f'{grating_name}_TM',
+            batch_name=f'{batch_name}',
+            peak_parameters=peak_parameters,
+            lua_script=lua_script,
+            plot_figure=plot_figure,
+            out_path=out_path,
+            log_fom=log_fom,
+            tolerance=tolerance,
+            iterations=sum(TM_optimizer_iterations))
+        if log_fom == 'True':
+            var, fom, fanos, simfano, expfano, simint, expint = io.load_fomlog(
+                directory_path=out_path,
+                sample_name=f'{grating_name}_TE',
+                batch_name=f'{batch_name}',
+                length_variables=len(TE_variables['S4 Strings']))
             fomplot(
-                wavelengths=grating_results[f'{grating_name} Wavelength Range'],
+                wavelengths=TE_grating_results[
+                    f'{grating_name}_TE Wavelength Range'],
                 variables=var,
                 figure_of_merit=fom,
                 fano_parameters=fanos,
-                simulation_fano=sim_fano,
-                experimental_fano=exp_fano,
+                simulation_fano=simfano,
+                experimental_fano=expfano,
                 simulation_intensity=simint,
                 experimental_intensity=expint,
-                variable_names=variables['S4 Strings'],
-                fano_names=grating_results[
-                    f'{grating_name} S4 Fano Fit Parameters'],
-                out_path=Path(f'{out_path}/{batch_name}_{grating_name}.png'))
+                variable_names=TE_variables['S4 Strings'],
+                fano_names=TE_grating_results[
+                    f'{grating_name}_TE S4 Fano Fit Parameters'],
+                out_path=Path(f'{out_path}/{batch_name}_{grating_name}_TE.png'))
+            var, fom, fanos, simfano, expfano, simint, expint = io.load_fomlog(
+                directory_path=out_path,
+                sample_name=f'{grating_name}_TM',
+                batch_name=f'{batch_name}',
+                length_variables=len(TM_optimized_variables['S4 Strings']))
+            fomplot(
+                wavelengths=TM_grating_results[
+                    f'{grating_name}_TM Wavelength Range'],
+                variables=var,
+                figure_of_merit=fom,
+                fano_parameters=fanos,
+                simulation_fano=simfano,
+                experimental_fano=expfano,
+                simulation_intensity=simint,
+                experimental_intensity=expint,
+                variable_names=TM_optimized_variables['S4 Strings'],
+                fano_names=TM_grating_results[
+                    f'{grating_name}_TM S4 Fano Fit Parameters'],
+                out_path=Path(f'{out_path}/{batch_name}_{grating_name}_TM.png'))
+        grating_results = dict(
+            TE_grating_results,
+            **TM_grating_results)
+        io.S4_args_out(
+            parameters_path=parameters_path,
+            results=TE_optimized_variables,
+            out_path=out_path)
     else:
         grating_results = {
             f'{grating_name} Missing Parameters':
-            [f'{argument}' for argument in arguments["Missing Arguments"]]}
+            [f'{argument}' for argument in arguments['Missing Arguments']]}
     print(f'Optimized {batch_name} {grating_name}\n')
     return grating_results

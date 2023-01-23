@@ -85,7 +85,11 @@ def get_grating_periods(file_path,
     period_parameters = load_json(file_path=file_path)
     period, error = (
         (period_parameters[f'{batch_name} Average'])[f'{grating_name}'])
-    period_error = 10 * error
+    if error == 0.0:
+        period_error = 1.0
+    else:
+        period_error = error
+    period_error = 10 * period_error
     return period, period_error
 
 
@@ -164,18 +168,15 @@ def measured_S4_parameter_files(file_paths,
         value, error = get_grating_periods(
             file_path=file_path,
             batch_name=batch_name,
-            grating_name=(grating_name.split('_'))[0])
-        error_bound = [value - error, value + error]
-    elif parameter_string == 'Peak':
-        value, error = get_peak_wavelength(
-            file_path=file_path,
             grating_name=grating_name)
         error_bound = [value - error, value + error]
+    elif parameter_string == 'Peak':
+        pass
     elif parameter_string == 'Grating':
         value, error = get_grating_thicknesses(
             file_path=file_path,
-            grating_name=(grating_name.split('_'))[0])
-        film, film_error = get_film_thickness(file_path=file_paths['Film Path'])
+            grating_name=grating_name)
+        film, _ = get_film_thickness(file_path=file_paths['Film Path'])
         error_bound = [value - error, film]
     elif parameter_string == 'Film':
         value, error = get_film_thickness(file_path=file_path)
@@ -220,8 +221,7 @@ def check_4layer_parameters(constants,
     arguments = [
         'harmonics', 'cover_n', 'cover_k', 'substrate_n', 'substrate_k',
         'material_n', 'material_k', 'fill_factor', 'period',
-        'grating_thickness', 'film_thickness', 'TE', 'TM',
-        'peak_wavelength']
+        'grating_thickness', 'film_thickness']
     key_present = []
     user_arguments = []
     missing_arguments = []
@@ -254,6 +254,7 @@ def S4_args(parameters_path,
                     can be null if no measured parameters
         batch_name: <string> batch name identifier string
         grating_name: <string> grating name identifier string
+        TE: <bool> if True operates in TE polarisation, else TM polarisation
     Returns:
         arguments: <dict> arguments dictionary containing true/false and missing
                     lua arguments
@@ -283,15 +284,38 @@ def S4_args(parameters_path,
                     variables['S4 Precision'].append((m_precision[1])[index])
         except:
             pass
-    polarise_string, polarise_value = get_S4_polarisation(
-        grating_string=grating_name)
-    for string, value in zip(polarise_string, polarise_value):
-        constants['S4 Strings'].append(string)
-        constants['S4 Values'].append(value)
     arguments = check_4layer_parameters(
         constants=constants,
         variables=variables)
     return arguments, constants, variables
+
+
+def S4_args_out(parameters_path,
+                results,
+                out_path):
+    '''
+    Save out optimized grating parameters to use across multiple samples on the
+    same chip. Only saves out the set variables, any measured parameters are
+    unaltered.
+    Args:
+        parameters_path: <string> input parameters json dictionary file path
+        results: <dict> grating optimizer variables output dictionary
+        out_path: <string> out path to results folder
+    Returns:
+        None
+    '''
+    constants, variables, measured = load_S4_parameters(
+        file_path=parameters_path)
+    for index, string in enumerate(results['S4 Strings']):
+        if string in variables['S4 Strings']:
+            (variables['S4 Strings'])[index] = (results['S4 Strings'])[index]
+    output = dict(
+        constants,
+        **variables,
+        **measured)
+    save_json_dicts(
+        out_path=Path(f'{out_path}/Working_S4_parameters.json'),
+        dictionary=output)
 
 
 def log_figure_of_merit(variables,
