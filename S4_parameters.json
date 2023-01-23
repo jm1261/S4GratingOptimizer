@@ -1,0 +1,67 @@
+{
+    "Constants": {
+        "Reflection": "True",
+        "S4 Strings": [
+            "harmonics",
+            "cover_n",
+            "cover_k",
+            "substrate_n",
+            "substrate_k"
+        ],
+        "S4 Values": [
+            21,
+            1,
+            0,
+            1.4542,
+            0
+        ]
+    },
+    "Variables": {
+        "S4 Strings": [
+            "material_n",
+            "material_k",
+            "fill_factor"
+        ],
+        "S4 Guesses": [
+            2.1,
+            0.01,
+            0.7
+        ],
+        "S4 Error Bounds": [
+            [0.0001, 2.5],
+            [0.0001, 2.5],
+            [0.4, 0.9]
+        ],
+        "S4 Precision": [
+            0.0001,
+            0.0001,
+            0.01
+        ]
+    },
+    "Measured": {
+        "Set Constants": [
+            "False",
+            "False",
+            "False",
+            "True"
+        ],
+        "S4 Strings": [
+            "period",
+            "grating_thickness",
+            "film_thickness",
+            "peak_wavelength"
+        ],
+        "File Strings": [
+            "Period",
+            "Grating",
+            "Film",
+            "Peak"
+        ],
+        "S4 Precision": [
+            0.01,
+            0.01,
+            0.1,
+            0.01
+        ]
+    }
+}

@@ -1,0 +1,83 @@
+{
+  "Dektak Batch Name": "Y1",
+  "Dektak File Name": [
+    "Y1_Repeat1_Film",
+    "Y1_Repeat2_Film",
+    "Y1_Repeat3_Film",
+    "Y1_Repeat4_Film",
+    "Y1_Repeat1_Film",
+    "Y1_Repeat2_Film",
+    "Y1_Repeat3_Film",
+    "Y1_Repeat4_Film"
+  ],
+  "Dektak File Path": [
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\Dektak\\Y1_Repeat1_Film.csv",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\Dektak\\Y1_Repeat2_Film.csv",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\Dektak\\Y1_Repeat3_Film.csv",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\Dektak\\Y1_Repeat4_Film.csv",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\Dektak\\Y1_Repeat1_Film.csv",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\Dektak\\Y1_Repeat2_Film.csv",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\Dektak\\Y1_Repeat3_Film.csv",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\Dektak\\Y1_Repeat4_Film.csv"
+  ],
+  "Dektak Secondary String": [
+    "Repeat1",
+    "Repeat2",
+    "Repeat3",
+    "Repeat4",
+    "Repeat1",
+    "Repeat2",
+    "Repeat3",
+    "Repeat4"
+  ],
+  "Repeat1 Film Thickness": -239.97076624850325,
+  "Repeat1 Film Thickness Error": 0.04369028364910616,
+  "Repeat1 Quadratic": [
+    -0.9772458477193133,
+    140.69570665822278,
+    11.931404911183158
+  ],
+  "Repeat1 Quadratic Errors": [
+    0.058660463363607744,
+    0.08566397563254208,
+    0.030263437535315272
+  ],
+  "Repeat2 Film Thickness": -301.8055833444628,
+  "Repeat2 Film Thickness Error": 0.045297553674454594,
+  "Repeat2 Quadratic": [
+    65.5935166999376,
+    148.77012710259768,
+    11.33600615932453
+  ],
+  "Repeat2 Quadratic Errors": [
+    0.09024637382335464,
+    0.1017612198357789,
+    0.027111206347843874
+  ],
+  "Repeat3 Film Thickness": 250.02614157795728,
+  "Repeat3 Film Thickness Error": 0.03778069795033677,
+  "Repeat3 Quadratic": [
+    2.053847337166743,
+    -175.5417989522497,
+    -0.682050568330859
+  ],
+  "Repeat3 Quadratic Errors": [
+    0.0584724786953026,
+    0.08824207345542166,
+    0.02581969942938753
+  ],
+  "Repeat4 Film Thickness": 242.2663560491099,
+  "Repeat4 Film Thickness Error": 0.04050941028583379,
+  "Repeat4 Quadratic": [
+    -28.930312353583183,
+    -278.14059117712344,
+    1.0311541205977761
+  ],
+  "Repeat4 Quadratic Errors": [
+    0.1979505979019762,
+    0.15753645105232925,
+    0.025258035398986328
+  ],
+  "Average Result": 258.5172118050083,
+  "Average Error": 14.588929420734258
+}

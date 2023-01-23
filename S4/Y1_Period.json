@@ -1,0 +1,1291 @@
+{
+  "SEM Batch Name": "Y1",
+  "SEM File Name": [
+    "Y1_P350_001",
+    "Y1_P350_002",
+    "Y1_P350_003",
+    "Y1_P350_004",
+    "Y1_P400_001",
+    "Y1_P400_002",
+    "Y1_P400_003",
+    "Y1_P400_004",
+    "Y1_P475_001",
+    "Y1_P475_002",
+    "Y1_P475_003",
+    "Y1_P475_004",
+    "Y1_P550_001",
+    "Y1_P550_002",
+    "Y1_P550_003",
+    "Y1_P550_004",
+    "Y1_P625_001",
+    "Y1_P625_002",
+    "Y1_P625_003",
+    "Y1_P625_004"
+  ],
+  "SEM File Path": [
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P350_001.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P350_002.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P350_003.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P350_004.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P400_001.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P400_002.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P400_003.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P400_004.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P475_001.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P475_002.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P475_003.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P475_004.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P550_001.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P550_002.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P550_003.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P550_004.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_001.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_002.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_003.bmp",
+    "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.bmp"
+  ],
+  "SEM Secondary String": [
+    "P350_001",
+    "P350_002",
+    "P350_003",
+    "P350_004",
+    "P400_001",
+    "P400_002",
+    "P400_003",
+    "P400_004",
+    "P475_001",
+    "P475_002",
+    "P475_003",
+    "P475_004",
+    "P550_001",
+    "P550_002",
+    "P550_003",
+    "P550_004",
+    "P625_001",
+    "P625_002",
+    "P625_003",
+    "P625_004"
+  ],
+  "P350_001 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P350_001",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P350_001.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P350_001",
+    "SEM Design Period": "350"
+  },
+  "P350_001 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P350_001 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 894,
+    "contrast": 1549,
+    "magnification": 37000,
+    "working_distance": 9.02,
+    "calibration_pixels": 39,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P350_001 Threshold Method": "Mean-StdDev",
+  "P350_001 Average Periods": [
+    364.6723646723648,
+    117.21611721611724,
+    156.92696745328323,
+    106.21606761957638,
+    71.34894091415832
+  ],
+  "P350_001 Period Errors": [
+    3.6711394598150185e-15,
+    9.177848649537546e-16,
+    1.113145698719895,
+    1.1253850287636942,
+    4.588924324768773e-16
+  ],
+  "P350_001 Average Frequencies": [
+    0.0010693359375,
+    0.004304199218750001,
+    0.003353678385416667,
+    0.005517578125,
+    0.008389485677083334
+  ],
+  "P350_001 Frequencies Errors": [
+    1.3804977697620204e-05,
+    2.6583155057105992e-05,
+    5.134630523972642e-05,
+    5.872739265084483e-05,
+    3.550413048024528e-05
+  ],
+  "P350_001 Grating Period": 364.6723646723648,
+  "P350_001 Period Error": 4.588924324768773e-16,
+  "P350_002 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P350_002",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P350_002.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P350_002",
+    "SEM Design Period": "350"
+  },
+  "P350_002 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P350_002 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 894,
+    "contrast": 1549,
+    "magnification": 27000,
+    "working_distance": 9.02,
+    "calibration_pixels": 288,
+    "calibration_distance": 1,
+    "distance_unit": "um",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P350_002 Threshold Method": "Mean-StdDev",
+  "P350_002 Average Periods": [
+    341.88034188034186,
+    117.27582846003907,
+    177.4610136452242,
+    87.14596949891067,
+    66.91245966254097
+  ],
+  "P350_002 Period Errors": [
+    0.0,
+    0.14136548263394877,
+    0.14136548263394869,
+    0.0,
+    0.2858161090611075
+  ],
+  "P350_002 Average Frequencies": [
+    0.0015991210937500002,
+    0.005508626302083334,
+    0.0034415690104166673,
+    0.008159993489583333,
+    0.012184244791666667
+  ],
+  "P350_002 Frequencies Errors": [
+    1.814995328912235e-05,
+    3.545858611982094e-05,
+    2.637608000372537e-05,
+    4.3062286412289585e-05,
+    0.00011809139719888865
+  ],
+  "P350_002 Grating Period": 341.88034188034186,
+  "P350_002 Period Error": 0.2858161090611075,
+  "P350_003 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P350_003",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P350_003.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P350_003",
+    "SEM Design Period": "350"
+  },
+  "P350_003 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P350_003 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 890,
+    "contrast": 1549,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P350_003 Threshold Method": "None",
+  "P350_003 Average Periods": [
+    117.9401108269395,
+    173.61999147485088,
+    86.95652173913047,
+    350.82702020202026,
+    58.661363347433145
+  ],
+  "P350_003 Period Errors": [
+    0.13078323472086253,
+    0.13078323472086256,
+    9.177848649537546e-16,
+    1.7135717545883444,
+    1.5945017173556586
+  ],
+  "P350_003 Average Frequencies": [
+    0.006783040364583335,
+    0.004195963541666667,
+    0.008857421875,
+    0.002120768229166667,
+    0.016273600260416667
+  ],
+  "P350_003 Frequencies Errors": [
+    3.121895740494177e-05,
+    2.722467944314931e-05,
+    3.676346572799421e-05,
+    8.63763058578331e-05,
+    9.684612746642213e-05
+  ],
+  "P350_003 Grating Period": 350.82702020202026,
+  "P350_003 Period Error": 1.5945017173556586,
+  "P350_004 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P350_004",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P350_004.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P350_004",
+    "SEM Design Period": "350"
+  },
+  "P350_004 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P350_004 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 890,
+    "contrast": 1549,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P350_004 Threshold Method": "Mean",
+  "P350_004 Average Periods": [
+    136.46099744245527,
+    155.2967333178331,
+    349.9945103205973,
+    89.02943597265457,
+    61.28992979180211
+  ],
+  "P350_004 Period Errors": [
+    0.8571727025474652,
+    0.8840567367586826,
+    1.5783432691005455,
+    1.6304462617639373,
+    2.318029260417083
+  ],
+  "P350_004 Average Frequencies": [
+    0.006136067708333333,
+    0.005288085937500001,
+    0.002134602864583334,
+    0.011319986979166667,
+    0.019498697916666665
+  ],
+  "P350_004 Frequencies Errors": [
+    4.713788812150595e-05,
+    4.7145476407154256e-05,
+    4.6760972567004314e-05,
+    0.0001819024053777507,
+    0.00028332773367772886
+  ],
+  "P350_004 Grating Period": 349.9945103205973,
+  "P350_004 Period Error": 2.318029260417083,
+  "P400_001 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P400_001",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P400_001.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P400_001",
+    "SEM Design Period": "400"
+  },
+  "P400_001 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P400_001 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 886,
+    "contrast": 1557,
+    "magnification": 16000,
+    "working_distance": 9.02,
+    "calibration_pixels": 170,
+    "calibration_distance": 1,
+    "distance_unit": "um",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P400_001 Threshold Method": "Mean-StdDev",
+  "P400_001 Average Periods": [
+    418.30065359477135,
+    203.4976152623212,
+    136.89839572192517,
+    102.80288346364091,
+    81.84143222506394
+  ],
+  "P400_001 Period Errors": [
+    3.6711394598150185e-15,
+    1.8355697299075092e-15,
+    9.177848649537546e-16,
+    0.019324228796946362,
+    0.0
+  ],
+  "P400_001 Average Frequencies": [
+    0.00293701171875,
+    0.005953776041666667,
+    0.009506835937500003,
+    0.012861328125,
+    0.01687337239583334
+  ],
+  "P400_001 Frequencies Errors": [
+    2.087685722806483e-05,
+    3.145046682330286e-05,
+    4.123445141703365e-05,
+    4.958531024089505e-05,
+    5.691899295764581e-05
+  ],
+  "P400_001 Grating Period": 418.30065359477135,
+  "P400_001 Period Error": 0.0,
+  "P400_002 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P400_002",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P400_002.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P400_002",
+    "SEM Design Period": "400"
+  },
+  "P400_002 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P400_002 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 898,
+    "contrast": 1541,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P400_002 Threshold Method": "Mean-StdDev",
+  "P400_002 Average Periods": [
+    400.0,
+    200.0,
+    133.33333333333331,
+    100.0,
+    79.09837962962962
+  ],
+  "P400_002 Period Errors": [
+    0.0,
+    0.0,
+    9.177848649537546e-16,
+    0.0,
+    0.1717641549009299
+  ],
+  "P400_002 Average Frequencies": [
+    0.0015722656250000003,
+    0.0038631184895833335,
+    0.006283365885416666,
+    0.008687337239583334,
+    0.011235351562499999
+  ],
+  "P400_002 Frequencies Errors": [
+    1.7836016269017427e-05,
+    2.8393903658576608e-05,
+    4.399270608768868e-05,
+    6.242107308866516e-05,
+    8.580130259564262e-05
+  ],
+  "P400_002 Grating Period": 400.0,
+  "P400_002 Period Error": 0.1717641549009299,
+  "P400_003 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P400_003",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P400_003.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P400_003",
+    "SEM Design Period": "400"
+  },
+  "P400_003 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P400_003 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 890,
+    "contrast": 1549,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P400_003 Threshold Method": "Mean-StdDev",
+  "P400_003 Average Periods": [
+    400.0,
+    200.0,
+    133.33333333333331,
+    100.0,
+    80.0
+  ],
+  "P400_003 Period Errors": [
+    0.0,
+    0.0,
+    9.177848649537546e-16,
+    0.0,
+    0.0
+  ],
+  "P400_003 Average Frequencies": [
+    0.0017773437500000003,
+    0.0038460286458333335,
+    0.0058740234375,
+    0.007880045572916668,
+    0.009899088541666667
+  ],
+  "P400_003 Frequencies Errors": [
+    1.7183839853824684e-05,
+    2.7782849213619234e-05,
+    4.213306258729786e-05,
+    5.967686443080058e-05,
+    7.564851494543229e-05
+  ],
+  "P400_003 Grating Period": 400.0,
+  "P400_003 Period Error": 0.0,
+  "P400_004 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P400_004",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P400_004.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P400_004",
+    "SEM Design Period": "400"
+  },
+  "P400_004 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P400_004 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 890,
+    "contrast": 1549,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P400_004 Threshold Method": "Mean-StdDev",
+  "P400_004 Average Periods": [
+    400.0,
+    200.0,
+    133.33333333333331,
+    100.0,
+    80.0
+  ],
+  "P400_004 Period Errors": [
+    0.0,
+    0.0,
+    9.177848649537546e-16,
+    0.0,
+    0.0
+  ],
+  "P400_004 Average Frequencies": [
+    0.001691080729166667,
+    0.003738606770833333,
+    0.0056363932291666665,
+    0.0075032552083333336,
+    0.009441731770833333
+  ],
+  "P400_004 Frequencies Errors": [
+    1.6962423040241812e-05,
+    2.514622636251407e-05,
+    3.448511000482484e-05,
+    4.525796967205721e-05,
+    5.512134948356238e-05
+  ],
+  "P400_004 Grating Period": 400.0,
+  "P400_004 Period Error": 0.0,
+  "P475_001 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P475_001",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P475_001.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P475_001",
+    "SEM Design Period": "475"
+  },
+  "P475_001 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P475_001 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 894,
+    "contrast": 1541,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P475_001 Threshold Method": "Mean+StdDev",
+  "P475_001 Average Periods": [
+    159.16176470588235,
+    103.37437686939184,
+    83.35773928215353,
+    489.2238138404025,
+    67.10679086271004
+  ],
+  "P475_001 Period Errors": [
+    0.1904910828735278,
+    0.7810838999416614,
+    0.8578414353075395,
+    2.1316878738267273,
+    2.060698484316824
+  ],
+  "P475_001 Average Frequencies": [
+    0.004746907552083333,
+    0.007928059895833334,
+    0.010313313802083335,
+    0.0013435872395833335,
+    0.014212239583333335
+  ],
+  "P475_001 Frequencies Errors": [
+    2.4849899743842225e-05,
+    9.276105017147368e-05,
+    9.647876627466443e-05,
+    6.497313380549838e-05,
+    9.614331022204699e-05
+  ],
+  "P475_001 Grating Period": 489.2238138404025,
+  "P475_001 Period Error": 2.060698484316824,
+  "P475_002 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P475_002",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P475_002.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P475_002",
+    "SEM Design Period": "475"
+  },
+  "P475_002 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P475_002 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 894,
+    "contrast": 1541,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P475_002 Threshold Method": "None",
+  "P475_002 Average Periods": [
+    180.07843137254903,
+    215.21568627450986,
+    117.64705882352945,
+    483.8953625235405,
+    85.92376804770872
+  ],
+  "P475_002 Period Errors": [
+    1.075193979419296,
+    1.075193979419296,
+    1.376677297430632e-15,
+    2.6174873254539994,
+    2.576455885520645
+  ],
+  "P475_002 Average Frequencies": [
+    0.0033675130208333337,
+    0.002723795572916667,
+    0.004942220052083333,
+    0.0011344401041666666,
+    0.009685872395833333
+  ],
+  "P475_002 Frequencies Errors": [
+    2.9170397137244314e-05,
+    2.7777218616909682e-05,
+    2.669555976886538e-05,
+    5.7377224997342544e-05,
+    7.418846165212716e-05
+  ],
+  "P475_002 Grating Period": 483.8953625235405,
+  "P475_002 Period Error": 2.576455885520645,
+  "P475_003 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P475_003",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P475_003.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P475_003",
+    "SEM Design Period": "475"
+  },
+  "P475_003 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P475_003 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 894,
+    "contrast": 1541,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P475_003 Threshold Method": "None",
+  "P475_003 Average Periods": [
+    161.80392156862746,
+    233.4901960784314,
+    147.5183823529412,
+    470.12867647058823,
+    71.26425278771598
+  ],
+  "P475_003 Period Errors": [
+    0.3718041432628012,
+    0.3718041432628012,
+    3.313493825795152,
+    3.313493825795152,
+    0.36645996136475234
+  ],
+  "P475_003 Average Frequencies": [
+    0.0037719726562500003,
+    0.00236083984375,
+    0.004713541666666667,
+    0.0011995442708333337,
+    0.010342610677083334
+  ],
+  "P475_003 Frequencies Errors": [
+    2.6642008927046893e-05,
+    2.1734513597177963e-05,
+    4.64960511440892e-05,
+    3.856026239633686e-05,
+    6.864837222916477e-05
+  ],
+  "P475_003 Grating Period": 470.12867647058823,
+  "P475_003 Period Error": 0.36645996136475234,
+  "P475_004 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P475_004",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P475_004.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P475_004",
+    "SEM Design Period": "475"
+  },
+  "P475_004 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P475_004 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 894,
+    "contrast": 1541,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P475_004 Threshold Method": "Mean-StdDev",
+  "P475_004 Average Periods": [
+    235.2941176470589,
+    500.0,
+    160.0,
+    117.64705882352945,
+    95.2380952380952
+  ],
+  "P475_004 Period Errors": [
+    2.753354594861264e-15,
+    0.0,
+    0.0,
+    1.376677297430632e-15,
+    9.177848649537546e-16
+  ],
+  "P475_004 Average Frequencies": [
+    0.001468912760416667,
+    0.0006062825520833333,
+    0.002687174479166667,
+    0.004038899739583333,
+    0.005730794270833334
+  ],
+  "P475_004 Frequencies Errors": [
+    1.445621901881904e-05,
+    1.1879027146533828e-05,
+    1.981927485484241e-05,
+    2.8594578178325693e-05,
+    3.209741336031442e-05
+  ],
+  "P475_004 Grating Period": 500.0,
+  "P475_004 Period Error": 9.177848649537546e-16,
+  "P550_001 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P550_001",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P550_001.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P550_001",
+    "SEM Design Period": "550"
+  },
+  "P550_001 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P550_001 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 894,
+    "contrast": 1541,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P550_001 Threshold Method": "Mean-StdDev",
+  "P550_001 Average Periods": [
+    571.4285714285714,
+    181.81818181818184,
+    266.1897920087575,
+    138.46743295019158,
+    110.87645865043125
+  ],
+  "P550_001 Period Errors": [
+    0.0,
+    9.177848649537546e-16,
+    0.27009435885689254,
+    0.26777940684748547,
+    0.11714257320097513
+  ],
+  "P550_001 Average Frequencies": [
+    0.0004532877604166666,
+    0.002215169270833333,
+    0.0012508138020833333,
+    0.0032128906250000005,
+    0.0048388671875
+  ],
+  "P550_001 Frequencies Errors": [
+    1.2450580895358663e-05,
+    1.7875852077517123e-05,
+    1.3774604388698533e-05,
+    2.384793547972627e-05,
+    3.283222934496912e-05
+  ],
+  "P550_001 Grating Period": 571.4285714285714,
+  "P550_001 Period Error": 0.11714257320097513,
+  "P550_002 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P550_002",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P550_002.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P550_002",
+    "SEM Design Period": "550"
+  },
+  "P550_002 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P550_002 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 894,
+    "contrast": 1541,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P550_002 Threshold Method": "Mean-StdDev",
+  "P550_002 Average Periods": [
+    571.4285714285714,
+    181.81818181818184,
+    202.96934865900377,
+    201.62835249042146,
+    106.24207255200405
+  ],
+  "P550_002 Period Errors": [
+    0.0,
+    9.177848649537546e-16,
+    2.07843241763305,
+    2.07843241763305,
+    0.5110867956620805
+  ],
+  "P550_002 Average Frequencies": [
+    0.00035074869791666663,
+    0.0020735677083333335,
+    0.002164713541666667,
+    0.0022159830729166666,
+    0.005131835937499999
+  ],
+  "P550_002 Frequencies Errors": [
+    1.3514658959229132e-05,
+    1.8623961299775165e-05,
+    3.421284741701883e-05,
+    3.971658501320657e-05,
+    6.952683078009642e-05
+  ],
+  "P550_002 Grating Period": 571.4285714285714,
+  "P550_002 Period Error": 0.5110867956620805,
+  "P550_003 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P550_003",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P550_003.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P550_003",
+    "SEM Design Period": "550"
+  },
+  "P550_003 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P550_003 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 894,
+    "contrast": 1541,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P550_003 Threshold Method": "None",
+  "P550_003 Average Periods": [
+    143.23406478578892,
+    176.51515151515153,
+    529.2989417989419,
+    228.9715608465609,
+    204.8920133187375
+  ],
+  "P550_003 Period Errors": [
+    0.4619096484091666,
+    0.46190964840916665,
+    4.078889808538807,
+    4.460309328017614,
+    2.9332497326225773
+  ],
+  "P550_003 Average Frequencies": [
+    0.00380126953125,
+    0.0028173828125000002,
+    0.0008894856770833334,
+    0.0032967122395833335,
+    0.0033471679687500006
+  ],
+  "P550_003 Frequencies Errors": [
+    2.8013000430171097e-05,
+    2.5788777476807016e-05,
+    4.2811378948171115e-05,
+    6.811636121192561e-05,
+    6.510433108163492e-05
+  ],
+  "P550_003 Grating Period": 529.2989417989419,
+  "P550_003 Period Error": 0.4619096484091666,
+  "P550_004 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P550_004",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P550_004.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P550_004",
+    "SEM Design Period": "550"
+  },
+  "P550_004 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P550_004 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 894,
+    "contrast": 1541,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P550_004 Threshold Method": "Mean-StdDev",
+  "P550_004 Average Periods": [
+    571.4285714285714,
+    181.81818181818184,
+    157.04228243021348,
+    249.83716475095784,
+    111.1111111111111
+  ],
+  "P550_004 Period Errors": [
+    0.0,
+    9.177848649537546e-16,
+    1.4955290732769395,
+    1.5044878139910784,
+    0.0
+  ],
+  "P550_004 Average Frequencies": [
+    0.00037434895833333336,
+    0.0020898437500000006,
+    0.0029125976562500004,
+    0.0014827473958333337,
+    0.004384765624999999
+  ],
+  "P550_004 Frequencies Errors": [
+    1.2965983464206662e-05,
+    1.810807006628728e-05,
+    3.191144434472087e-05,
+    2.799323455120899e-05,
+    2.8600675658175846e-05
+  ],
+  "P550_004 Grating Period": 571.4285714285714,
+  "P550_004 Period Error": 0.0,
+  "P625_001 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_001",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_001.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_001",
+    "SEM Design Period": "625"
+  },
+  "P625_001 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P625_001 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 890,
+    "contrast": 1549,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P625_001 Threshold Method": "Mean-StdDev",
+  "P625_001 Average Periods": [
+    307.6923076923077,
+    244.7368421052632,
+    632.4561403508773,
+    153.84615384615384,
+    125.0
+  ],
+  "P625_001 Period Errors": [
+    1.8355697299075092e-15,
+    3.879633375303906,
+    3.8796333753039063,
+    9.177848649537546e-16,
+    0.0
+  ],
+  "P625_001 Average Frequencies": [
+    0.0008902994791666667,
+    0.0016178385416666667,
+    0.00017659505208333335,
+    0.0026359049479166663,
+    0.0038134765625000002
+  ],
+  "P625_001 Frequencies Errors": [
+    9.041059146088835e-06,
+    1.962915868763634e-05,
+    1.8494750641153713e-05,
+    1.713262402039473e-05,
+    2.5102247287421993e-05
+  ],
+  "P625_001 Grating Period": 632.4561403508773,
+  "P625_001 Period Error": 0.0,
+  "P625_002 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_002",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_002.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_002",
+    "SEM Design Period": "625"
+  },
+  "P625_002 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P625_002 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 890,
+    "contrast": 1549,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P625_002 Threshold Method": "None",
+  "P625_002 Average Periods": [
+    210.52631578947373,
+    299.6794871794872,
+    161.61858974358975,
+    136.52510683760684,
+    654.1564542483661
+  ],
+  "P625_002 Period Errors": [
+    1.8355697299075092e-15,
+    1.103854430407878,
+    1.1089102717522215,
+    2.4985217640794057,
+    2.6386335298100825
+  ],
+  "P625_002 Average Frequencies": [
+    0.002364908854166667,
+    0.0014086914062500001,
+    0.0031136067708333335,
+    0.004242350260416667,
+    0.00042317708333333335
+  ],
+  "P625_002 Frequencies Errors": [
+    1.966480061223782e-05,
+    2.175356951926238e-05,
+    2.496099353815795e-05,
+    2.9775798910337657e-05,
+    2.5284752081790864e-05
+  ],
+  "P625_002 Grating Period": 654.1564542483661,
+  "P625_002 Period Error": 2.4985217640794057,
+  "P625_003 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_003",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_003.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_003",
+    "SEM Design Period": "625"
+  },
+  "P625_003 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P625_003 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.4,
+    "brightness": 890,
+    "contrast": 1549,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P625_003 Threshold Method": "Mean-StdDev",
+  "P625_003 Average Periods": [
+    307.6923076923077,
+    666.6666666666666,
+    210.52631578947373,
+    153.84615384615384,
+    125.0
+  ],
+  "P625_003 Period Errors": [
+    1.8355697299075092e-15,
+    0.0,
+    1.8355697299075092e-15,
+    9.177848649537546e-16,
+    0.0
+  ],
+  "P625_003 Average Frequencies": [
+    0.00102294921875,
+    0.00024169921875,
+    0.0018074544270833335,
+    0.002635091145833333,
+    0.003583984375000001
+  ],
+  "P625_003 Frequencies Errors": [
+    1.1661233258518135e-05,
+    1.1661233258518135e-05,
+    1.170403060664232e-05,
+    1.2626962436127589e-05,
+    1.7664206851594964e-05
+  ],
+  "P625_003 Grating Period": 666.6666666666666,
+  "P625_003 Period Error": 0.0,
+  "P625_004 Image": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "C:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.bmp",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P625_004 Log File": {
+    "Parent Directory": "SEM",
+    "SEM File Name": "Y1_P625_004",
+    "SEM File Path": "c:\\Users\\joshs\\github\\PhD_Project\\MicroscopyPeriodAnalysis\\SEM\\Y1_P625_004.txt",
+    "SEM Primary String": "Y1",
+    "SEM Secondary String": "P625_004",
+    "SEM Design Period": "625"
+  },
+  "P625_004 Log": {
+    "acceleration_voltage": 2.0,
+    "emission_current": 65.2,
+    "brightness": 894,
+    "contrast": 1541,
+    "magnification": 30000,
+    "working_distance": 9.02,
+    "calibration_pixels": 32,
+    "calibration_distance": 100,
+    "distance_unit": "nm",
+    "image_width": 1280,
+    "image_height": 960
+  },
+  "P625_004 Threshold Method": "Mean-StdDev",
+  "P625_004 Average Periods": [
+    312.1794871794872,
+    211.47660818713453,
+    661.2291947818264,
+    153.91346153846152,
+    125.24038461538461
+  ],
+  "P625_004 Period Errors": [
+    1.287886775484623,
+    0.6716077639488188,
+    1.4494193534545363,
+    0.09591843726495493,
+    0.08467804963513238
+  ],
+  "P625_004 Average Frequencies": [
+    0.0008406575520833334,
+    0.001642252604166667,
+    6.34765625e-05,
+    0.0027303059895833334,
+    0.004198404947916667
+  ],
+  "P625_004 Frequencies Errors": [
+    7.614167573270306e-06,
+    8.382807765795906e-06,
+    7.447500297795974e-06,
+    1.4242536552398476e-05,
+    2.718526982099433e-05
+  ],
+  "P625_004 Grating Period": 661.2291947818264,
+  "P625_004 Period Error": 0.08467804963513238,
+  "Y1 Average": {
+    "P350": [
+      351.8435592688311,
+      4.728427174189341
+    ],
+    "P400": [
+      404.57516339869284,
+      4.575163398692837
+    ],
+    "P475": [
+      485.8119632086328,
+      6.208730102447934
+    ],
+    "P550": [
+      560.896164021164,
+      10.53240740740739
+    ],
+    "P625": [
+      653.627114011934,
+      7.5072847527727875
+    ]
+  }
+}

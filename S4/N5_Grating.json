@@ -1,0 +1,25 @@
+{
+  "AFM Batch Name": "N5",
+  "AFM File Name": [
+    "N5_P390_Grating",
+    "N5_P390_Grating"
+  ],
+  "AFM File Path": [
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\N5_P390_Grating.txt",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\N5_P390_Grating.txt"
+  ],
+  "AFM Secondary String": [
+    "P390",
+    "P390"
+  ],
+  "P390 Region 1 Trim Index": [
+    185,
+    196
+  ],
+  "P390 Region 2 Trim Index": [
+    204,
+    276
+  ],
+  "P390 Step Height": 79.49982323232324,
+  "P390 Step Height Error": 7.1909779244337315
+}

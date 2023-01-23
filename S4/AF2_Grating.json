@@ -1,0 +1,73 @@
+{
+  "AFM Batch Name": "AF2",
+  "AFM File Name": [
+    "AF2_P350_step_data",
+    "AF2_P400_step_data",
+    "AF2_P475_step_data",
+    "AF2_P550_step_data",
+    "AF2_P350_step_data",
+    "AF2_P400_step_data",
+    "AF2_P475_step_data",
+    "AF2_P550_step_data"
+  ],
+  "AFM File Path": [
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\AF2_P350_step_data.txt",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\AF2_P400_step_data.txt",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\AF2_P475_step_data.txt",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\AF2_P550_step_data.txt",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\AF2_P350_step_data.txt",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\AF2_P400_step_data.txt",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\AF2_P475_step_data.txt",
+    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\AF2_P550_step_data.txt"
+  ],
+  "AFM Secondary String": [
+    "P350",
+    "P400",
+    "P475",
+    "P550",
+    "P350",
+    "P400",
+    "P475",
+    "P550"
+  ],
+  "P350 Region 1 Trim Index": [
+    157,
+    192
+  ],
+  "P350 Region 2 Trim Index": [
+    202,
+    235
+  ],
+  "P350 Step Height": 60.88567784415584,
+  "P350 Step Height Error": 1.0170614285326054,
+  "P400 Region 1 Trim Index": [
+    237,
+    268
+  ],
+  "P400 Region 2 Trim Index": [
+    284,
+    325
+  ],
+  "P400 Step Height": 57.37990920535012,
+  "P400 Step Height Error": 1.6178380249295508,
+  "P475 Region 1 Trim Index": [
+    289,
+    329
+  ],
+  "P475 Region 2 Trim Index": [
+    228,
+    272
+  ],
+  "P475 Step Height": 53.459083925,
+  "P475 Step Height Error": 2.32585277295154,
+  "P550 Region 1 Trim Index": [
+    236,
+    246
+  ],
+  "P550 Region 2 Trim Index": [
+    255,
+    371
+  ],
+  "P550 Step Height": 19.891546258620686,
+  "P550 Step Height Error": 4.606020553608419
+}
