@@ -177,7 +177,7 @@ def measured_S4_parameter_files(file_paths,
             file_path=file_path,
             grating_name=grating_name)
         film, _ = get_film_thickness(file_path=file_paths['Film Path'])
-        error_bound = [value - error, film]
+        error_bound = [value - error, film - 0.001]
     elif parameter_string == 'Film':
         value, error = get_film_thickness(file_path=file_path)
         error_bound = [value - error, value + error]
@@ -289,7 +289,7 @@ def S4_args(parameters_path,
         variables=variables)
     return arguments, constants, variables
 
-
+''' Fix this for later use perhaps '''
 def S4_args_out(parameters_path,
                 results,
                 out_path):
