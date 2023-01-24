@@ -29,34 +29,18 @@ def batch_4_layer_optimizer(batch_name,
     all_paths = [file_paths[key] for key in file_paths.keys()]
     batch_dictionary.update({'File Paths': [f'{path}' for path in all_paths]})
     batch_dictionary.update({'Gratings': gratings})
-    parameterspath = [
-        parameters_path,
-        Path(f'{out_path}/Working_S4_parameters.json')]
-    for index, grating in enumerate(gratings):
-        if index == 0:
-            grating_results = anal.optimize_S4_grating(
-                parameters_path=parameterspath[0],
-                measured_paths=file_paths,
-                batch_name=f'{batch_name}',
-                grating_name=f'{grating}',
-                peak_parameters=peak_parameters,
-                lua_script='1D_4layer_grating.lua',
-                plot_figure=plot_figure,
-                out_path=out_path,
-                log_fom=log_fom)
-            batch_dictionary.update({f'{grating}': grating_results})
-        else:
-            grating_results = anal.optimize_S4_grating(
-                parameters_path=parameterspath[1],
-                measured_paths=file_paths,
-                batch_name=f'{batch_name}',
-                grating_name=f'{grating}',
-                peak_parameters=peak_parameters,
-                lua_script='1D_4layer_grating.lua',
-                plot_figure=plot_figure,
-                out_path=out_path,
-                log_fom=log_fom)
-            batch_dictionary.update({f'{grating}': grating_results})
+    for grating in gratings:
+        grating_results = anal.optimize_S4_grating(
+            parameters_path=parameters_path,
+            measured_paths=file_paths,
+            batch_name=f'{batch_name}',
+            grating_name=f'{grating}',
+            peak_parameters=peak_parameters,
+            lua_script='1D_4layer_grating.lua',
+            plot_figure=plot_figure,
+            out_path=out_path,
+            log_fom=log_fom)
+        batch_dictionary.update({f'{grating}': grating_results})
     return batch_dictionary
 
 
@@ -72,8 +56,7 @@ if __name__ == '__main__':
     ''' Loop Experimental Files '''
     for batch, filepaths in batches.items():
         out_file = Path(f'{directory_paths["Results Path"]}/{batch}_S4.json')
-        oot_file = Path(f'{directory_paths["Results Path"]}/{batch}_Test.json')
-        if oot_file.is_file():
+        if out_file.is_file():
             pass
         else:
             results_dictionary = batch_4_layer_optimizer(

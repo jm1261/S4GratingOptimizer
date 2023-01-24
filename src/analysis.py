@@ -474,7 +474,10 @@ def compare_experimental_simulation(sample_name,
             differences array
     '''
     if sum(simulation_fano) == 0:
-        figure_merit = (500 ** 2)
+        figure_merit = (np.random.randint(
+            low=250000,
+            high=250100,
+            size=1))[0]
         figure_merit_fano = (500 ** 2)
         figure_merit_overlap = (500 ** 2)
         differences = 0
@@ -512,9 +515,11 @@ def create_variables_dictionary(iteration_variable,
     Returns:
         variables: <dict> reconstructed variables dict
     '''
+    print(f'index = {index}')
     strings = []
     values = []
     for i, name in enumerate(iteration_constant_names):
+        print(f'i = {i}')
         if i == index:
             strings.append(iteration_variable_name)
             values.append(iteration_variable)
@@ -1087,10 +1092,6 @@ def optimize_S4_grating(parameters_path,
         grating_results = dict(
             TE_grating_results,
             **TM_grating_results)
-        io.S4_args_out(
-            parameters_path=parameters_path,
-            results=TE_optimized_variables,
-            out_path=out_path)
     else:
         grating_results = {
             f'{grating_name} Missing Parameters':
