@@ -515,11 +515,9 @@ def create_variables_dictionary(iteration_variable,
     Returns:
         variables: <dict> reconstructed variables dict
     '''
-    print(f'index = {index}')
     strings = []
     values = []
     for i, name in enumerate(iteration_constant_names):
-        print(f'i = {i}')
         if i == index:
             strings.append(iteration_variable_name)
             values.append(iteration_variable)
