@@ -5,12 +5,13 @@
     "N5_P390_Grating"
   ],
   "AFM File Path": [
-    "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\N5_P390_Grating.txt",
     "C:\\Users\\joshs\\github\\PhD_Project\\SurfaceProfileAnalysis\\AFM\\N5_P390_Grating.txt"
   ],
   "AFM Secondary String": [
     "P390",
-    "P390"
+    "P405",
+    "P440",
+    "P475"
   ],
   "P390 Region 1 Trim Index": [
     185,
@@ -21,5 +22,11 @@
     276
   ],
   "P390 Step Height": 79.49982323232324,
-  "P390 Step Height Error": 7.1909779244337315
+  "P390 Step Height Error": 7.1909779244337315,
+  "P405 Step Height": 79.49982323232324,
+  "P405 Step Height Error": 7.1909779244337315,
+  "P440 Step Height": 79.49982323232324,
+  "P440 Step Height Error": 7.1909779244337315,
+  "P475 Step Height": 79.49982323232324,
+  "P475 Step Height Error": 7.1909779244337315
 }
