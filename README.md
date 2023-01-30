@@ -31,6 +31,16 @@ This software was created by Josh Male in December 2022 as part of the ongoing a
   * [Parent Directory](#parent-directory)
   * [Batch Processing](#batch-processing)
   * [Find File Paths](#find-file-paths)
+* [Grating Optimizer](#grating-optimizer)
+  * [Data Input](#data-input)
+  * [Parameter Optimizer](#parameter-optimizer)
+    * [Individual Parameter Optimization](#individual-parameter-optimization)
+    * [Batch Parameter Optimization](#batch-parameter-optimization)
+    * [TM Optimization](#tm-optimization)
+  * [Compute Figure Of Merit](#compute-figure-of-merit)
+  * [Calculate Figure Of Merit](#calculate-figure-of-merit)
+  * [Fano Resonances](#fano-resonances)
+  * [Log Figure Merit](#log-figure-of-merit)
 
 [Back to Top](#s4-grating-optimizer)
 
@@ -271,20 +281,94 @@ It should be noted that these constants and variables are exclusively for transv
 
 [Back to Contents](#table-of-contents)
 
-# Something Like This Order Maybe? Or Reverse The Order?
+### Parameter Optimizer
 
-### Individual Parameter Optimization
+The code utilises input variable parameters to find the optimum grating parameters that match experimentally obtained data. To do this, the code mimics human behavior, starting first by doing a rough sweep of the parameters individually, then narrowing in on a good range before altering all parameters simultaneously.
 
-### Batch Parameter Optimization
+Due to the nature of guided mode resonances, the code begins looking at the transverse electric (TE) polarisation before moving on to vary only a few parameters for transverse magnetic (TM) polarisation.
+
+A figure of merit is produced to indicate a good fit, though due to the optimize minimize function used here, the figure of merit should be small, nor large. This means a great figure of merit would be between 0 and 1. Figure of merits are always positive due to the squared nature of error calculation discussed later.
+
+[Back to Contents](#table-of-contents)
+
+#### Individual Parameter Optimization
+
+Individual parameter optimization loops through the user-assigned grating variables one at a time to find the best figure of merit for each parameter. The process repeats with each iteration looking for the best figure of merit. Once the full range of iteration variables has finished, the code begins to iterate further, adding to a loop counter.
+
+The loop counter serves two purposes; firstly, to prevent the code looping ad infinitum, with the 6th iteration of all variables serving as the final loop, and secondly it serves as the optimizer tolerance and differential matrix step.
+
+The tolerance and differential step size decreases in size with each loop. This means that as the code loops through the iteration variables, the level of tolerance before the function considers a global minimum becomes smaller, i.e., the search for a global minimum requires more stability with each loop through the variables. As for the step size in the jacobian (differential) matrix, this is simply related to the tolerance for better performance (as recommended by multiple developers).
+
+The precision with which the system can vary the iteration variables is given in the user defined dictionary under the key 'S4 Precision', though there remains some doubt over if this affects the simulation performance.
+
+#### Batch Parameter Optimization
+
+Once the figure of merit reaches >1, or the iteration count reaches 6, the individual variable optimizer considers itself complete. The optimum variables are sent to a dictionary and are fed directly into the batch parameter optimizer. This process is the same, but the system has the ability to vary all parameters simultaneously.
+
+Again, this process returns a figure of merit with respect to experimentally obtained data. The tolerance is reduced further by 1, meaning a higher level of stability required for the batch parameter process. Once the optimizer finds a minimum, values are outputted to a dictionary.
+
+#### TM Optimization
+
+TM optimization piggy-backs on the TE optimizer, using the batch processed variables as a starting guess, but reducing the number of potential variables. As TM resonance occurs in the same physical grating but with a different effective index, the parameters that can be varied are only the refractive index, grating thickness, and film thickness. The same process, with individual and batch variable iterations, is repeated to produce a second figure of merit.
+
+All data is outputted separately into a results file, with a total figure of merit being produced by summing TE and TM figures.
+
+[Back to Contents](#table-of-contents)
 
 ### Compute Figure Of Merit
 
+Due to the nature of the optimize module used, the figure of merit for this software is at best when 0. I.e., a smaller figure of merit indicates a better fitting of grating parameters. To manipulate the optimizer into selecting the correct parameters, there are several methods to calculate the figure of merit.
+
+Figure of merit is only calculated once the RCWA simulation is complete, and is a combination of experimental and simulated data, more on this discussed in later subheadings.
+
+The compute figure of merit function in analysis.py requires dictionary variables and constants. Dictionaries are used throughout the code for data handling to ensure variables can be called using "easy-to-read" naming conventions. The dictionaries are created equally for both individual and simultaneous parameter variations to allow the same calculate figure of merit process to be used.
+
+[Back to Contents](#table-of-contents)
+
 ### Calculate Figure Of Merit
 
-### Compare Fano Resonances
+The figure of merit is calculated using two combined figures of merit. Firstly, the experimental data and the simulated data for resonant intensity is compared directly using an overlap calculation. The intensities are normalized, to between 0 and 1, and the simulated intensity is subtracted from the experimental intensity (and then squared) to create a point-wise difference, with heavier weighting as points begin to drift further away from expected values. This method produces a figure of merit, no greater than the sum of all intensity points (as the difference is never greater than 1).
 
-### Compare Intensity Overlap
+Then, using a fano resonance fitting method, the experimental and simulated fano parameters are compared. Again, the individual parameters for the simulated data are subtracted from the experimental parameters and squared, to increase the figure of merit exponentially as the fitting becomes poor.
 
-### Figure Of Merit
+In previous iterations of the code, the fano parameters were weighted, and the combination of the two figures of merit were weighted. However, this is no longer the case due to the relative differences. It was found that, if the scales of the parameters in the fano resonance equation are different, for example resonant wavelength ~100s of nm, and the damping coefficient 0-1, the relative differences between experimental and simulation is sufficient to weight the optimizer without introducing artificial weights. The same applies when combining the two methods, the relative difference between the fano equation parameters is of similar scale to the overlap error. I.e., when one is bad, the other is bad, and as the parameters vary and the optimizer narrows in on the best parameters, the two correlate.
+
+Should no fano resonance be found, the code will return an exceptionally large figure of merit at random between 250,000 and 250,100 (so as not to trick the optimizer into thinking it is complete due to the figure of merit not changing). This number is chosen as an impossibly large figure of merit and ensure the optimizer avoids input grating parameters of that scale.
+
+[Back to Contents](#table-of-contents)
+
+### Fano Resonances
+
+There are two fano resonance equations used in this code, from two competing literature sources. One fano resonance equation is used primarily for experimentally measured fano responses, and as such has a damping coefficient in the equation which can account for scattering loss, and one fano resonance equation without a damping consideration.
+
+In this code, the damping fano resonance equation is treated as the primary equation, where the other is only used if it is impossible to fit the damping coefficient to the simulated data. The reasoning behind this is to ensure that the comparison between simulation and experimental data is as close as possible.
+
+[Back to Contents](#table-of-contents)
 
 ### S<sup> 4 </sup> Simulation
+
+The S<sup> 4 </sup> simulation requires a corresponding lua script to be in the repository's main directory, though the way this is activated means the command is suitable for any application. The coded ensures that the arguments required to run the S<sup> 4 </sup> are all present before execution, otherwise the code will fail.
+
+The simulation output is handled by StringIo module, which allows the wavelength, transmission, and reflection data to be handled like a txt file and manipulated by numpy without any printing to the console occurring (which is the usual method).
+
+The constants dictionary generated from the S4_parameters.json, handles the transmission or reflection distinction to keep the code as general as possible. The user simply has to set whether they are working in transmission or reflection.
+
+[Back to Contents](#table-of-contents)
+
+### Log Figure Of Merit
+
+If the user wishes to log the figure of merit, this process is relatively simple. Due to the nature of the optimizer, whereby only one argument can be returned (the figure of merit itself), the logged data has to be outputted to a file during the process.
+
+This logged data includes the input parameters as they vary, the figure of merit value, the current simulation wavelength and intensity (replaced with each iteration), and the fano fit parameters for the optimized grating parameters. These are all stored in separate csv files in the Results directory path and are then plotted to produce a graphical representation. An example of this is shown here:
+
+![example_log](./src/Images/example_log.jpg)
+
+Here we can see the top image represents the varied grating parameters, their respective values with each iterations and the corresponding figure of merit. The middle graph represents the fano resonance parameters for each peak at each iterations and the corresponding figure of merit produced (same as top graph). The bottom graph is the final simulation and experimental intensity comparison with the best grating parameters.
+
+[Back to Contents](#table-of-contents)
+
+[Back to Top](#s4-grating-optimizer)
+
+## Acknowledgements
+
+Thanks to George, Manuel, Chris, and Sam for their assistance in creating the grating optimizer.
